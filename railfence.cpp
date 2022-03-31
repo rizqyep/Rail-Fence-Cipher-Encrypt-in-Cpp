@@ -6,7 +6,9 @@ using namespace std;
 int stringLength;
 int key;
 
-char matrix[1000][1000];
+char matrix[100][100];
+char encrypted[100];
+char decrypted[100];
 
 //Matrix Functions
 
@@ -64,14 +66,9 @@ void fillMatrix(string plainText)
             }
         }
 
-        if (plainText.at(i) == ' ')
-        {
-            matrix[rowPosition][colPosition] = 'X';
-        }
-        else
-        {
+      
             matrix[rowPosition][colPosition] = plainText.at(i);
-        }
+        
     }
     cout << endl;
 }
@@ -209,14 +206,15 @@ int main()
     cout << "1. Encrypt\n2.Decrypt\n\n";
     cout << "Your Choice : ";
     cin >> choice;
-    fflush(stdin);
     switch (choice)
     {
     case 1:
 
         cout << "Insert plaintext : ";
+         cin.ignore();
         getline(cin, plainText);
-
+        auto remove_space =  remove(plainText.begin(),plainText.end(),' ');
+        plainText.erase(remove_space,plainText.end());
         cout << "Insert Key : ";
         cin >> key;
         stringLength = plainText.length();
